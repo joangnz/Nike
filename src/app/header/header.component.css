@@ -1,5 +1,16 @@
 header {
     #top-nav {
-        width: min(98%, 1440px);
+        margin: 0 auto;
+        width: min(95%, 1440px);
+        padding: 10px;
+
+        li {
+            font-weight: 700;
+        }
+
+        .subnav li+li::before {
+            margin: 0 10px;
+            content: "|";
+        }
     }
 }

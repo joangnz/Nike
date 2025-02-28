@@ -3,7 +3,7 @@
     --bg: #ffffff;
     --header-primary: #1F1F21;
     --header-secondary: #111111;
-    --primary: #000000;
+    --primary: #fff;
     --secondary: #40382e;
     --contrast: #69ba5e;
     --SITE_URL: 'http://localhost:4200';
@@ -18,7 +18,7 @@
 html {
     background-color: var(--bg);
     font-size: 20px;
-    font-family: oxygen, trebuchet ms, Arial, sans-serif;
+    font-family: "Helvetica Now Text Medium", Helvetica, Arial, sans-serif;
 }
 
 body {
