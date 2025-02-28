@@ -1,8 +1,7 @@
 /* Main Utility */
 :root {
-    --bg: #ffffff;
-    --header-primary: #1F1F21;
-    --header-secondary: #111111;
+    --bg-primary: #1F1F21;
+    --bg-secondary: #111111;
     --primary: #fff;
     --secondary: #40382e;
     --contrast: #69ba5e;

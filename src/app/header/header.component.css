@@ -1,8 +1,16 @@
 header {
+    #top-nav-holder {
+        background-color: var(--bg-secondary);
+    }
+
+    #main-nav-holder {
+        background-color: var(--bg-primary);
+    }
+
     #top-nav {
         margin: 0 auto;
         width: min(95%, 1440px);
-        padding: 10px;
+        padding: 5px 10px;
 
         li {
             font-weight: 700;
@@ -13,4 +21,5 @@ header {
             content: "|";
         }
     }
+
 }
