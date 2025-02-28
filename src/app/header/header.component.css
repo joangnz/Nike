@@ -1,0 +1,5 @@
+header {
+    #top-nav {
+        width: min(98%, 1440px);
+    }
+}
