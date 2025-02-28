@@ -1,0 +1,159 @@
+/* Main Utility */
+:root {
+    --bg: #ffffff;
+    --header-primary: #1F1F21;
+    --header-secondary: #111111;
+    --primary: #000000;
+    --secondary: #40382e;
+    --contrast: #69ba5e;
+    --SITE_URL: 'http://localhost:4200';
+    font-size: 12px;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--bg);
+    font-size: 20px;
+    font-family: oxygen, trebuchet ms, Arial, sans-serif;
+}
+
+body {
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Class Utility */
+.wf {
+    display: inline-block;
+    width: 100% !important;
+}
+
+.hf {
+    height: 100% !important;
+}
+
+.flex {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.justify-start {
+    justify-content: flex-start !important;
+}
+
+.justify-end {
+    justify-content: flex-end !important;
+}
+
+.justify-center {
+    justify-content: center !important;
+}
+
+.justify-between {
+    justify-content: space-between !important;
+}
+
+.justify-around {
+    justify-content: space-around !important;
+}
+
+.justify-evenly {
+    justify-content: space-evenly !important;
+}
+
+.align-top {
+    align-items: flex-start !important;
+}
+
+.align-bottom {
+    align-items: flex-end !important;
+}
+
+.justify-self-start {
+    justify-self: start !important;
+}
+
+.justify-self-end {
+    justify-self: end !important;
+}
+
+.justify-self-center {
+    justify-self: center !important;
+}
+
+.col {
+    flex-direction: column !important;
+}
+
+.nowrap {
+    flex-wrap: nowrap !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.relative {
+    position: relative !important;
+}
+
+ul.no-bullet {
+    padding: 0;
+    list-style-type: none;
+}
+
+li.list-header {
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/* Class Coloring */
+.gray {
+    background-color: #f6f6f4;
+}
+
+.dark-gray {
+    background-color: #333;
+}
+
+/* Text Styling */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+li,
+a,
+label,
+button {
+    color: var(--primary);
+    cursor: default;
+    text-decoration: none;
+}
+
+p,
+span,
+li,
+label,
+button {
+    font-size: 1rem;
+    line-height: 1.5;
+}
