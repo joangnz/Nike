@@ -13,7 +13,12 @@ header {
         padding: 5px 10px;
 
         li {
+            font-size: 0.8rem;
             font-weight: 700;
+        }
+
+        #other-logos li {
+            margin: 0 10px;
         }
 
         .subnav li+li::before {
@@ -22,4 +27,9 @@ header {
         }
     }
 
+    #main-nav {
+        #logo-holder {
+            margin: 0 50px;
+        }
+    }
 }

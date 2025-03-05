@@ -1,7 +1,7 @@
 <header class="flex">
     <div id="top-nav-holder" class="wf">
         <nav id="top-nav" class="flex justify-between">
-            <ul class="flex no-bullet">
+            <ul id="other-logos" class="flex no-bullet">
                 <li><a href=""><app-jordan-svg style="filter: var(--filter);"></app-jordan-svg></a></li>
                 <li>
                     <a href=""><app-converse-svg style="filter: var(--filter);"></app-converse-svg></a>
@@ -19,13 +19,19 @@
     <div id="main-nav-holder" class="wf">
         <nav id="main-nav">
             <!-- Logo Holder -->
-            <div>
+            <div id="logo-holder">
                 <a href=""><app-nike-svg style="filter: var(--filter);"></app-nike-svg></a>
             </div>
 
             <!-- Nav and Other Holder -->
             <div>
-                <nav></nav>
+                <nav>
+                    <ul class="flex no-bullet">
+                        <li><a [href]="SITE_URL + '/home'">Home</a></li>
+                        <li><a [href]="SITE_URL + '/products'">Products</a></li>
+                        <li><a [href]="SITE_URL + '/admin'">Admin</a></li>
+                    </ul>
+                </nav>
                 <div></div>
             </div>
         </nav>
