@@ -1,1 +1,44 @@
-<p>admin works!</p>
+<main id="admin" class="flex">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="flex col">
+        <h1>Nuevo Producto</h1>
+
+        <div>
+            <label for="id">Nº de Referencia</label>
+            <input formControlName="id" id="id">
+            @if (productForm.get('id')?.invalid && productForm.get('id')?.touched) {
+            <div *if="productForm.get('id')?.errors?.['required']" class="error-message">
+                El nombre es obligatorio.
+            </div>
+            <div *if="productForm.get('id')?.errors?.['minlength']" class="error-message">
+                Debe tener al menos 3 caracteres.
+            </div>
+            }
+        </div>
+        <div>
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" [required]="true">
+        </div>
+        <div>
+            <label for="price">Precio</label>
+            <input type="text" id="price" name="price" [required]="true">
+        </div>
+        <div>
+            <label for="description">Descripción</label>
+            <input type="textarea" id="description" name="description" [required]="true">
+        </div>
+        <div>
+            <label for="type">Tipo de Producto</label>
+            <input type="textarea" id="type" name="type" [required]="true">
+        </div>
+        <div>
+            <label for="discount">Producto de Oferta</label>
+            <input type="checkbox" id="discount" name="discount">
+        </div>
+        <div>
+            <label for="image">Imagen del Producto</label>
+            <input type="file" id="image" name="image">
+        </div>
+
+        <button type="submit">Añadir</button>
+    </form>
+</main>
