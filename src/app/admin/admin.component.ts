@@ -29,6 +29,8 @@ export class AdminComponent {
       name: ['', [Validators.required, Validators.minLength(3)]],
       price: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
+      type: ['', [Validators.required]],
+      discount: [false],
       imageUrl: [
         '',
         [
