@@ -17,22 +17,24 @@
         </nav>
     </div>
     <div id="main-nav-holder" class="wf">
-        <nav id="main-nav">
+        <nav id="main-nav" class="flex justify-between">
             <!-- Logo Holder -->
             <div id="logo-holder">
                 <a href=""><app-nike-svg style="filter: var(--filter);"></app-nike-svg></a>
             </div>
 
             <!-- Nav and Other Holder -->
-            <div>
+            <div id="main-subnav" class="flex justify-between">
                 <nav>
-                    <ul class="flex no-bullet">
+                    <ul class="flex justify-evenly no-bullet">
                         <li><a [href]="SITE_URL + '/home'">Home</a></li>
                         <li><a [href]="SITE_URL + '/products'">Products</a></li>
                         <li><a [href]="SITE_URL + '/admin'">Admin</a></li>
                     </ul>
                 </nav>
-                <div></div>
+                <div>
+                    <h1>TSEST</h1>
+                </div>
             </div>
         </nav>
     </div>

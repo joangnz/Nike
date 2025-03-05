@@ -31,5 +31,22 @@ header {
         #logo-holder {
             margin: 0 50px;
         }
+
+        #main-subnav {
+            width: 60%;
+
+            li+li {
+                margin-left: 20px;
+            }
+
+            li {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+            h1 {
+                margin-right: 50px;
+            }
+        }
     }
 }
