@@ -5,15 +5,16 @@
         <div>
             <label for="id">Nº de Referencia</label>
             <input formControlName="id" id="id">
-            @if (productForm.get('id')?.invalid && productForm.get('id')?.touched) {
-            <div *if="productForm.get('id')?.errors?.['required']" class="error-message">
-                El nombre es obligatorio.
-            </div>
-            <div *if="productForm.get('id')?.errors?.['minlength']" class="error-message">
-                Debe tener al menos 3 caracteres.
-            </div>
-            }
+
         </div>
+        @if (productForm.get('id')?.invalid && productForm.get('id')?.touched) {
+        <div *ngIf="productForm.get('id')?.errors?.['required']" class="error-message">
+            El nombre es obligatorio.
+        </div>
+        <div *ngIf="productForm.get('id')?.errors?.['minlength']" class="error-message">
+            Debe tener al menos 3 caracteres.
+        </div>
+        }
         <div>
             <label for="name">Nombre</label>
             <input type="text" id="name" name="name" [required]="true">

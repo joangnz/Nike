@@ -1,5 +1,4 @@
 import { Injectable, Signal, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Product } from '../interfaces/product';
 
 @Injectable({
@@ -11,8 +10,6 @@ export class ProductsService {
   get products(): Signal<Product[]> {
     return this._products.asReadonly();
   }
-
-  constructor(private http: HttpClient) {}
 
   loadProducts(): Signal<Product[]> {
     return this._products;
