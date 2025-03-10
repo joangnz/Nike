@@ -10,10 +10,6 @@ main#admin {
             width: 50%;
             display: flex;
             justify-content: space-between;
-
-            label {
-                text-align: right;
-            }
         }
     }
 }
