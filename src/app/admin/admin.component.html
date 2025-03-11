@@ -2,10 +2,10 @@
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="flex col">
         <h1>Nuevo Producto</h1>
 
+        <!-- ID -->
         <div>
             <label for="id">Nº de Referencia</label>
             <input formControlName="id" id="id">
-
         </div>
         @if (productForm.get('id')?.invalid && productForm.get('id')?.touched) {
         <div *ngIf="productForm.get('id')?.errors?.['required']" class="error-message">
@@ -16,6 +16,7 @@
         </div>
         }
 
+        <!-- Name -->
         <div>
             <label for="name">Nombre</label>
             <input formControlName="name" id="name">
@@ -29,6 +30,7 @@
         </div>
         }
 
+        <!-- Price -->
         <div>
             <label for="price">Precio</label>
             <input formControlName="price" id="price">
@@ -42,6 +44,7 @@
         </div>
         }
 
+        <!-- Description -->
         <div>
             <label for="description">Descripción</label>
             <input type="textarea" id="description" formControlName="description">
@@ -55,6 +58,7 @@
         </div>
         }
 
+        <!-- Type -->
         <div>
             <label for="type">Tipo de Producto</label>
             <input id="type" name="type" formControlName="type">
@@ -65,10 +69,13 @@
         </div>
         }
 
+        <!-- Discount -->
         <div>
             <label for="discount">Producto de Oferta</label>
             <input type="checkbox" id="discount" formControlName="discount">
         </div>
+
+        <!-- Image -->
         <div>
             <label for="image">Imagen del Producto</label>
             <input type="file" id="image" formControlName="imageUrl">
