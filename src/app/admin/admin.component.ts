@@ -30,7 +30,14 @@ export class AdminComponent {
       id: ['', [Validators.required, Validators.minLength(3)]],
       name: ['', [Validators.required, Validators.minLength(3)]],
       price: ['', [Validators.required, Validators.min(1)]],
-      description: ['', [Validators.required, Validators.maxLength(500)]],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(500),
+          Validators.pattern('/^(?!.*\bnigger\b).*$/i'),
+        ],
+      ],
       type: ['', [Validators.required]],
       discount: [false],
       imageUrl: [

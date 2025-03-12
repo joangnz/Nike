@@ -56,6 +56,9 @@
         <div *ngIf="productForm.get('description')?.errors?.['maxlength']" class="error-message">
             Debe tener un máximo de 500 caracteres.
         </div>
+        <div *ngIf="productForm.get('description')?.errors?.['pattern']" class="error-message">
+            Tu descripción es inapropiada.
+        </div>
         }
 
         <!-- Type -->
