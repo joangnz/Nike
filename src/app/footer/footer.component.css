@@ -2,4 +2,19 @@ footer {
     background-color: var(--bg-primary);
     height: 200px;
     width: 100%;
+
+    #footer-subnav {
+        width: 70%;
+
+        ul li {
+            font-weight: bold;
+            line-height: 2rem;
+            color: #333;
+        }
+
+        ul li:first-child {
+            margin-bottom: 20px;
+            color: #111;
+        }
+    }
 }
