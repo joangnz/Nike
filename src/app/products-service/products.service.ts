@@ -5,17 +5,13 @@ import { Product } from '../interfaces/product';
   providedIn: 'root',
 })
 export class ProductsService {
-  private _products = signal<Product[]>([]);
-
-  get products(): Signal<Product[]> {
-    return this._products.asReadonly();
-  }
-
-  loadProducts(): Signal<Product[]> {
-    return this._products;
-  }
+  products = signal<Product[]>([]);
 
   addProduct(product: Product): void {
-    this._products.update((products) => [...products, product]);
+    this.products.update((products) => [...this.products(), product]);
+  }
+
+  getProducts(): Signal<Product[]> {
+    return this.products;
   }
 }

@@ -18,7 +18,9 @@ import { ProductsService } from '../products-service/products.service';
 })
 export class AdminComponent {
   SITE_URL = SITE_URL;
+
   productForm: FormGroup;
+  formSubmitted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,14 +37,21 @@ export class AdminComponent {
         '',
         [
           Validators.required,
-          Validators.pattern(/^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm),
+          Validators.pattern(
+            '^.*.(jpg|jpeg|png|gif|bmp|webp|svg|tiff)$|^https?://[a-zA-Z0-9.-]+(?:/[a-zA-Z0-9._%/-]*)*.(jpg|jpeg|png|gif|bmp|webp|svg|tiff)$'
+          ),
         ],
       ],
     });
   }
 
+  getControl(controlName: string) {
+    return this.productForm.get(controlName);
+  }
+
   onSubmit(): void {
     if (this.productForm.valid) {
+      this.formSubmitted = false;
       this.productsService.addProduct(this.productForm.value);
       console.log(this.productForm.value);
     }
