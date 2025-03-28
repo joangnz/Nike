@@ -8,12 +8,13 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule], // Add HttpClientModule
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -38,19 +39,26 @@ export class LoginComponent {
       const credentials = this.loginForm.value;
 
       // Attempt admin login
-      if (this.authService.loginAdmin(credentials)) {
-        alert('Admin login successful');
-        console.log('Logged in as admin');
-        this.router.navigate(['/home']);
-      }
-      // Attempt user login
-      else if (this.authService.loginUser(credentials)) {
-        alert('User login successful');
-        console.log('Logged in as user');
-        this.router.navigate(['/home']);
-      } else {
-        alert('Invalid credentials');
-      }
+      this.authService.loginAdmin(credentials).subscribe({
+        next: () => {
+          alert('Admin login successful');
+          console.log('Logged in as admin');
+          this.router.navigate(['/home']);
+        },
+        error: () => {
+          // Attempt user login if admin login fails
+          this.authService.loginUser(credentials).subscribe({
+            next: () => {
+              alert('User login successful');
+              console.log('Logged in as user');
+              this.router.navigate(['/home']);
+            },
+            error: () => {
+              alert('Invalid credentials');
+            },
+          });
+        },
+      });
     }
   }
 }

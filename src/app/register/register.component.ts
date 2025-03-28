@@ -6,13 +6,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router'; // Import Router
+import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule], // Add HttpClientModule
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
@@ -22,7 +23,7 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router // Inject Router
+    private router: Router
   ) {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
@@ -34,13 +35,15 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       const registrationData = this.registerForm.value;
 
-      // Attempt to register the user
-      if (this.authService.registerUser(registrationData)) {
-        alert('Registration successful');
-        this.router.navigate(['/home']); // Redirect to /home
-      } else {
-        alert('User already exists');
-      }
+      this.authService.registerUser(registrationData).subscribe({
+        next: () => {
+          alert('Registration successful');
+          this.router.navigate(['/home']);
+        },
+        error: () => {
+          alert('Error registering user');
+        },
+      });
     }
   }
 }

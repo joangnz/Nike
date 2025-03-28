@@ -1,62 +1,54 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private users = signal<{ username: string; password: string }[]>([
-    { username: 'admin', password: 'admin' }, // Dummy admin user
-    { username: 'user', password: 'user' } // Dummy user
-  ]);
+  private apiUrl = 'http://localhost:5000/api'; // Replace with your API base URL
 
-  private currentUser = signal<{ username: string; role: string } | null>(null);
+  constructor(private http: HttpClient) {}
 
-  loginAdmin(credentials: { username: string; password: string }): boolean {
-    const admin = this.users().find(
-      (user) =>
-        user.username === credentials.username &&
-        user.password === credentials.password &&
-        credentials.username === 'admin'
-    );
-
-    if (admin) {
-      this.currentUser.set({ username: admin.username, role: 'admin' });
-      return true;
-    }
-    return false;
+  /**
+   * Admin login
+   * @param credentials - Admin username and password
+   * @returns Observable with the login response
+   */
+  loginAdmin(credentials: {
+    username: string;
+    password: string;
+  }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/admin/login`, credentials);
   }
 
-  loginUser(credentials: { username: string; password: string }): boolean {
-    const user = this.users().find(
-      (user) =>
-        user.username === credentials.username &&
-        user.password === credentials.password
-    );
-
-    if (user) {
-      this.currentUser.set({ username: user.username, role: 'user' });
-      return true;
-    }
-    return false;
+  /**
+   * User login
+   * @param credentials - User username and password
+   * @returns Observable with the login response
+   */
+  loginUser(credentials: {
+    username: string;
+    password: string;
+  }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/login`, credentials);
   }
 
-  registerUser(data: { username: string; password: string }): boolean {
-    const existingUser = this.users().find(
-      (user) => user.username === data.username
-    );
-
-    if (!existingUser) {
-      this.users.update((users) => [...users, data]);
-      return true;
-    }
-    return false; // User already exists
+  /**
+   * Register a new user
+   * @param data - User registration data
+   * @returns Observable with the registration response
+   */
+  registerUser(data: { username: string; password: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/register`, data);
   }
 
-  getCurrentUser(): Signal<{ username: string; role: string } | null> {
-    return this.currentUser;
-  }
-
+  /**
+   * Logout the current user
+   * @returns void
+   */
   logout(): void {
-    this.currentUser.set(null);
+    // Implement logout logic if needed (e.g., clearing tokens or session data)
+    console.log('User logged out');
   }
 }
