@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SITE_URL } from '../app.constants';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -6,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -16,9 +18,15 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  loginForm!: FormGroup;
+  SITE_URL = SITE_URL;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  loginForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -27,13 +35,22 @@ export class LoginComponent {
 
   login(): void {
     if (this.loginForm.valid) {
-      this.authService.loginUser(this.loginForm.value).subscribe({
-        next: (response) => {
-          alert('Login successful');
-          console.log('User role:', response.role); // Handle role-based logic here
-        },
-        error: () => alert('Invalid credentials'),
-      });
+      const credentials = this.loginForm.value;
+
+      // Attempt admin login
+      if (this.authService.loginAdmin(credentials)) {
+        alert('Admin login successful');
+        console.log('Logged in as admin');
+        this.router.navigate(['/home']);
+      }
+      // Attempt user login
+      else if (this.authService.loginUser(credentials)) {
+        alert('User login successful');
+        console.log('Logged in as user');
+        this.router.navigate(['/home']);
+      } else {
+        alert('Invalid credentials');
+      }
     }
   }
 }
