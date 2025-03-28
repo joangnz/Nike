@@ -1,0 +1,16 @@
+main#register {
+    form {
+        width: 60%;
+        padding: 20px;
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--primary);
+        border-radius: 25px;
+
+        div {
+            width: 50%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+    }
+}

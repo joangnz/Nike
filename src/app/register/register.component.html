@@ -1,5 +1,5 @@
-<div>
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
+<main id="register" class="flex">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="flex col">
         <h2>Register</h2>
 
         <!-- Username -->
@@ -24,4 +24,4 @@
 
         <button type="submit" [disabled]="registerForm.invalid">Register</button>
     </form>
-</div>
+</main>
