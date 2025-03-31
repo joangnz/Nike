@@ -13,7 +13,8 @@ export class ProductsComponent {
   products: Signal<Product[]>;
 
   constructor(public productsService: ProductsService) {
-    this.products = this.productsService.getProducts();
+    this.products = this.productsService.products;
+    this.productsService.loadProducts();
   }
 
   trackByName(index: number, product: Product): string {
