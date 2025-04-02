@@ -34,7 +34,7 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       const registrationData = this.registerForm.value;
 
-      this.authService.registerUser(registrationData).subscribe({
+      this.authService.register(registrationData).subscribe({
         next: () => {
           alert('Registration successful');
           this.router.navigate(['/home']);

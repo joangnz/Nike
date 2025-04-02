@@ -1,12 +1,18 @@
-export const loginAdmin = (req, res) => {
+export const loginAdmin = async (req, res) => {
     const { username, password } = req.body;
 
-    // Dummy admin credentials
-    if (username === 'admin' && password === 'admin123') {
-        return res.status(200).json({ message: 'Login successful', role: 'admin' });
-    }
+    try {
+        // Check the admins table
+        const adminQuery = 'SELECT * FROM admins WHERE username = ? AND password = ?';
+        const [adminRows] = await db.query(adminQuery, [username, password]);
 
-    return res.status(401).json({ message: 'Invalid credentials' });
+        if (adminRows.length > 0) {
+            return res.status(200).json({ message: 'Login successful', role: 'admin' });
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
+        return res.status(500).json({ message: 'Internal server error', error });
+    }
 };
 
 export const getAll = async (res) => {

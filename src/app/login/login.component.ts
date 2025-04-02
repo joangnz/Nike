@@ -37,21 +37,13 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
 
-      this.authService.loginAdmin(credentials).subscribe({
+      this.authService.login(credentials).subscribe({
         next: () => {
           alert('Admin login successful');
           this.router.navigate(['/home']);
         },
         error: () => {
-          this.authService.loginUser(credentials).subscribe({
-            next: () => {
-              alert('User login successful');
-              this.router.navigate(['/home']);
-            },
-            error: () => {
-              alert('Invalid credentials');
-            },
-          });
+          alert('Invalid credentials');
         },
       });
     }

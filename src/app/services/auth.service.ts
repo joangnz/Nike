@@ -13,25 +13,17 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  loginAdmin(credentials: {
-    username: string;
-    password: string;
-  }): Observable<any> {
+  login(credentials: { username: string; password: string }): Observable<any> {
     return this.http
-      .post(`${this.apiUrl}/admin/login`, credentials)
-      .pipe(tap(() => this.userRoleSubject.next('admin')));
+      .post<{ role: string }>(`${this.apiUrl}/user/login`, credentials)
+      .pipe(
+        tap((response) => {
+          this.userRoleSubject.next(response.role); // Dynamically set the role
+        })
+      );
   }
 
-  loginUser(credentials: {
-    username: string;
-    password: string;
-  }): Observable<any> {
-    return this.http
-    .post(`${this.apiUrl}/user/login`, credentials)
-    .pipe(tap(()=>this.userRoleSubject.next('user')));
-  }
-
-  registerUser(data: { username: string; password: string }): Observable<any> {
+  register(data: { username: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/user/register`, data);
   }
 
