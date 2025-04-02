@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { SITE_URL } from '../app.constants';
+
+import { AuthService } from '../services/auth.service';
+
 import { JordanSvgComponent } from '../jordan-svg/jordan-svg.component';
 import { ConverseSvgComponent } from '../converse-svg/converse-svg.component';
 import { NikeSvgComponent } from '../nike-svg/nike-svg.component';
@@ -18,6 +21,12 @@ import { NikeSvgComponent } from '../nike-svg/nike-svg.component';
 })
 export class HeaderComponent {
   SITE_URL = SITE_URL;
-
   title = 'routing.';
+  isAdmin = false;
+
+  constructor(private authService: AuthService) {
+    this.authService.userRole$.subscribe((role) => {
+      this.isAdmin = role === 'admin';
+    });
+  }
 }

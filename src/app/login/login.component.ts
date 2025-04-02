@@ -37,19 +37,15 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
 
-      // Attempt admin login
       this.authService.loginAdmin(credentials).subscribe({
         next: () => {
           alert('Admin login successful');
-          console.log('Logged in as admin');
           this.router.navigate(['/home']);
         },
         error: () => {
-          // Attempt user login if admin login fails
           this.authService.loginUser(credentials).subscribe({
             next: () => {
               alert('User login successful');
-              console.log('Logged in as user');
               this.router.navigate(['/home']);
             },
             error: () => {

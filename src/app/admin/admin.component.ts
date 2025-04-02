@@ -35,7 +35,6 @@ export class AdminComponent {
         [
           Validators.required,
           Validators.maxLength(500),
-          Validators.pattern('/^(?!.*\bnigger\b).*$/i'),
         ],
       ],
       type: ['', [Validators.required]],

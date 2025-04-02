@@ -7,7 +7,7 @@ import { error } from 'console';
   providedIn: 'root',
 })
 export class ProductsService {
-  private apiUrl = 'https://localhost:5000/products';
+  private apiUrl = 'http://localhost:5000/api/products';
 
   private _products = signal<Product[]>([]);
 
