@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { SITE_URL } from '../app.constants';
 
@@ -15,6 +16,7 @@ import { NikeSvgComponent } from '../nike-svg/nike-svg.component';
     ConverseSvgComponent,
     NikeSvgComponent,
     RouterLink,
+    CommonModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
