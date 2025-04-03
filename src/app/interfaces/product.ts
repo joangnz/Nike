@@ -5,5 +5,5 @@ export interface Product {
   description: string;
   type: string;
   discount: boolean;
-  imageUrl: string;
+  image: string;
 }

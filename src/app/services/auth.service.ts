@@ -15,19 +15,26 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { username: string; password: string }): Observable<any> {
+  login(data: { username: string; password: string }): Observable<any> {
     return this.http
-      .post<{ role: string }>(`${this.apiUrl}/user/login`, credentials)
+      .post<{ role: string }>(`${this.apiUrl}/user/login`, data)
       .pipe(
         tap((response) => {
           this.setUserRoleInStorage(response.role);
-          this.userRoleSubject.next(response.role); // Dynamically set the role
+          this.userRoleSubject.next(response.role);
         })
       );
   }
 
   register(data: { username: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/user/register`, data);
+    return this.http
+      .post(`${this.apiUrl}/user/register`, data)
+      .pipe(
+        tap((response) => {
+          this.setUserRoleInStorage("user");
+          this.userRoleSubject.next("user");
+        })
+      );
   }
 
   logout(): void {

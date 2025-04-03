@@ -1,7 +1,6 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { HttpClient } from '@angular/common/http';
-import { error } from 'console';
 
 @Injectable({
   providedIn: 'root',

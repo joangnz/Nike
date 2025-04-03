@@ -39,7 +39,7 @@ export class LoginComponent {
 
       this.authService.login(credentials).subscribe({
         next: () => {
-          alert('Admin login successful');
+          alert('Login successful');
           this.router.navigate(['/home']);
         },
         error: () => {
