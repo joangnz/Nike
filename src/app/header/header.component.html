@@ -12,7 +12,8 @@
                 <li><a href="">Buscar una tienda</a></li>
                 <li><a href="">Ayuda</a></li>
                 <li><a href="">Únete a nosotros</a></li>
-                <li><a routerLink="/login">Iniciar Sesión</a></li>
+                <li *ngIf="!loggedIn"><a routerLink="/login">Iniciar Sesión</a></li>
+                <li *ngIf="loggedIn" (click)="logout()"><a routerLink="/home">Logout</a></li>
             </ul>
         </nav>
     </div>
@@ -33,7 +34,7 @@
                     </ul>
                 </nav>
                 <div>
-                    <h1>TSEST</h1>
+                    <h1><a>My Cart</a></h1>
                 </div>
             </div>
         </nav>
