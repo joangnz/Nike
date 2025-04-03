@@ -30,7 +30,6 @@ export class HeaderComponent {
   constructor(private authService: AuthService) {
     this.authService.userRole$.subscribe((role) => {
       this.loggedIn = !!role;
-      console.log("loggedIn:", this.loggedIn);
       this.isAdmin = role === 'admin';
     });
   }
