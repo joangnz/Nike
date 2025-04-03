@@ -6,11 +6,11 @@
         <div>
             <label for="username">Username</label>
             <input id="username" formControlName="username" type="text" />
-
         </div>
         <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error-message">
             <div *ngIf="loginForm.get('username')?.errors?.['required']">Username is required.</div>
         </div>
+
         <!-- Password -->
         <div>
             <label for="password">Password</label>
