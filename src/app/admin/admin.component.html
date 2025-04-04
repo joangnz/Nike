@@ -1,5 +1,5 @@
 <main id="admin" class="flex">
-    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="flex col">
+    <form [formGroup]="createProductForm" (ngSubmit)="submitCreate()" class="flex col">
         <h1>Nuevo Producto</h1>
 
         <!-- ID -->
@@ -7,11 +7,11 @@
             <label for="id">Nº de Referencia</label>
             <input formControlName="id" id="id">
         </div>
-        @if (productForm.get('id')?.invalid && productForm.get('id')?.touched) {
-        <div *ngIf="productForm.get('id')?.errors?.['required']" class="error-message">
-            El nombre es obligatorio.
+        @if (createProductForm.get('id')?.invalid && createProductForm.get('id')?.touched) {
+        <div *ngIf="createProductForm.get('id')?.errors?.['required']" class="error-message">
+            El ID es obligatorio.
         </div>
-        <div *ngIf="productForm.get('id')?.errors?.['minlength']" class="error-message">
+        <div *ngIf="createProductForm.get('id')?.errors?.['minlength']" class="error-message">
             Debe tener al menos 3 caracteres.
         </div>
         }
@@ -21,11 +21,11 @@
             <label for="name">Nombre</label>
             <input formControlName="name" id="name">
         </div>
-        @if (productForm.get('name')?.invalid && productForm.get('name')?.touched) {
-        <div *ngIf="productForm.get('name')?.errors?.['required']" class="error-message">
+        @if (createProductForm.get('name')?.invalid && createProductForm.get('name')?.touched) {
+        <div *ngIf="createProductForm.get('name')?.errors?.['required']" class="error-message">
             El nombre es obligatorio.
         </div>
-        <div *ngIf="productForm.get('name')?.errors?.['minlength']" class="error-message">
+        <div *ngIf="createProductForm.get('name')?.errors?.['minlength']" class="error-message">
             Debe tener al menos 3 caracteres.
         </div>
         }
@@ -35,11 +35,11 @@
             <label for="price">Precio</label>
             <input formControlName="price" id="price">
         </div>
-        @if (productForm.get('price')?.invalid && productForm.get('price')?.touched) {
-        <div *ngIf="productForm.get('price')?.errors?.['required']" class="error-message">
+        @if (createProductForm.get('price')?.invalid && createProductForm.get('price')?.touched) {
+        <div *ngIf="createProductForm.get('price')?.errors?.['required']" class="error-message">
             El precio es obligatorio.
         </div>
-        <div *ngIf="productForm.get('price')?.errors?.['min']" class="error-message">
+        <div *ngIf="createProductForm.get('price')?.errors?.['min']" class="error-message">
             Debe tener un valor mínimo de 1.
         </div>
         }
@@ -49,11 +49,11 @@
             <label for="description">Descripción</label>
             <input type="textarea" id="description" formControlName="description">
         </div>
-        @if (productForm.get('description')?.invalid && productForm.get('description')?.touched) {
-        <div *ngIf="productForm.get('description')?.errors?.['required']" class="error-message">
+        @if (createProductForm.get('description')?.invalid && createProductForm.get('description')?.touched) {
+        <div *ngIf="createProductForm.get('description')?.errors?.['required']" class="error-message">
             La descripción es obligatoria.
         </div>
-        <div *ngIf="productForm.get('description')?.errors?.['maxlength']" class="error-message">
+        <div *ngIf="createProductForm.get('description')?.errors?.['maxlength']" class="error-message">
             Debe tener un máximo de 500 caracteres.
         </div>
         }
@@ -63,8 +63,8 @@
             <label for="type">Tipo de Producto</label>
             <input id="type" name="type" formControlName="type">
         </div>
-        @if (productForm.get('type')?.invalid && productForm.get('type')?.touched) {
-        <div *ngIf="productForm.get('type')?.errors?.['required']" class="error-message">
+        @if (createProductForm.get('type')?.invalid && createProductForm.get('type')?.touched) {
+        <div *ngIf="createProductForm.get('type')?.errors?.['required']" class="error-message">
             El tipo de producto es obligatorio.
         </div>
         }
@@ -80,15 +80,35 @@
             <label for="image">Imagen del Producto</label>
             <input type="file" id="image" formControlName="imageUrl">
         </div>
-        @if (productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched) {
-        <div *ngIf="productForm.get('imageUrl')?.errors?.['required']" class="error-message">
+        @if (createProductForm.get('imageUrl')?.invalid && createProductForm.get('imageUrl')?.touched) {
+        <div *ngIf="createProductForm.get('imageUrl')?.errors?.['required']" class="error-message">
             La imagen del producto es obligatoria.
         </div>
-        <div *ngIf="productForm.get('imageUrl')?.errors?.['pattern']" class="error-message">
+        <div *ngIf="createProductForm.get('imageUrl')?.errors?.['pattern']" class="error-message">
             El archivo no tiene el formato aceptado.
         </div>
         }
 
-        <button type="submit" [disabled]="productForm.invalid">Añadir</button>
+        <button type="submit" [disabled]="createProductForm.invalid">Añadir</button>
+    </form>
+
+    <form [formGroup]="deleteProductForm" (ngSubmit)="submitDelete()" class="flex col">
+        <h1>Eliminar Producto</h1>
+        
+        <!-- ID -->
+        <div>
+            <label for="id">Nº de Referencia</label>
+            <input formControlName="id" id="id">
+        </div>
+        @if (deleteProductForm.get('id')?.invalid && deleteProductForm.get('id')?.touched) {
+        <div *ngIf="deleteProductForm.get('id')?.errors?.['required']" class="error-message">
+            El ID es obligatorio.
+        </div>
+        <div *ngIf="deleteProductForm.get('id')?.errors?.['minlength']" class="error-message">
+            Debe tener al menos 3 caracteres.
+        </div>
+        }
+
+        <button type="submit" [disabled]="deleteProductForm.invalid">Añadir</button>
     </form>
 </main>

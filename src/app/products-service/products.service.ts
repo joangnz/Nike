@@ -1,6 +1,7 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,13 +21,25 @@ export class ProductsService {
     this.http.get<Product[]>(this.apiUrl).subscribe({
       next: (data) => this._products.set(data),
       error: (err) => console.error('Error al cargar productos:', err),
-    })
+    });
   }
 
   addProduct(product: Product): void {
     this.http.post<Product>(this.apiUrl, product).subscribe({
-      next: (newProduct) => this._products.update((products) => [...products, newProduct]),
+      next: (newProduct) =>
+        this._products.update((products) => [...products, newProduct]),
       error: (err) => console.error('Error al añadir producto:', err),
-    })
+    });
+  }
+
+  deleteProduct(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`)
+      .pipe(
+        tap(() =>
+          this._products.update((products) =>
+            products.filter((product) => product.id !== id)
+          )
+        )
+      );
   }
 }

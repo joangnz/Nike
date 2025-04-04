@@ -19,14 +19,16 @@ import { ProductsService } from '../products-service/products.service';
 export class AdminComponent {
   SITE_URL = SITE_URL;
 
-  productForm: FormGroup;
+  createProductForm: FormGroup;
+  deleteProductForm: FormGroup;
   formSubmitted = false;
+  message: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private productsService: ProductsService
   ) {
-    this.productForm = this.fb.group({
+    this.createProductForm = this.fb.group({
       id: ['', [Validators.required, Validators.minLength(3)]],
       name: ['', [Validators.required, Validators.minLength(3)]],
       price: ['', [Validators.required, Validators.min(1)]],
@@ -49,17 +51,37 @@ export class AdminComponent {
         ],
       ],
     });
+    this.deleteProductForm = this.fb.group({
+      id: ['', [Validators.required, Validators.minLength(3)]],
+    });
   }
 
   getControl(controlName: string) {
-    return this.productForm.get(controlName);
+    return this.createProductForm.get(controlName);
   }
 
-  onSubmit(): void {
-    if (this.productForm.valid) {
+  submitCreate(): void {
+    if (this.createProductForm.valid) {
       this.formSubmitted = false;
-      this.productsService.addProduct(this.productForm.value);
-      console.log(this.productForm.value);
+      this.productsService.addProduct(this.createProductForm.value);
+      console.log(this.createProductForm.value);
+    }
+  }
+
+  submitDelete(): void {
+    if (this.deleteProductForm.valid) {
+      this.formSubmitted = false;
+      const productId = this.deleteProductForm.value.id;
+      
+      this.productsService.deleteProduct(productId).subscribe({
+        next: () => {
+          alert('Producto eliminado correctamente');
+          this.deleteProductForm.reset();
+        },
+        error: (err: Error) => {
+          alert('Error al eliminar el producto: ' + err.message);
+        }
+      });
     }
   }
 }
