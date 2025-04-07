@@ -17,24 +17,24 @@ export class AuthService {
 
   login(data: { username: string; password: string }): Observable<any> {
     return this.http
-      .post<{ role: string }>(`${this.apiUrl}/user/login`, data)
+      .post<{ role: string, id: string }>(`${this.apiUrl}/user/login`, data)
       .pipe(
         tap((response) => {
           this.setUserRoleInStorage(response.role);
+          this.setUserIdInStorage(parseInt(response.id, 10));
           this.userRoleSubject.next(response.role);
         })
       );
   }
 
   register(data: { username: string; password: string }): Observable<any> {
-    return this.http
-      .post(`${this.apiUrl}/user/register`, data)
-      .pipe(
-        tap((response) => {
-          this.setUserRoleInStorage("user");
-          this.userRoleSubject.next("user");
-        })
-      );
+    return this.http.post<{id: string }>(`${this.apiUrl}/user/register`, data).pipe(
+      tap((response) => {
+        this.setUserRoleInStorage('user');
+        this.setUserIdInStorage(parseInt(response.id, 10));
+        this.userRoleSubject.next('user');
+      })
+    );
   }
 
   logout(): void {
@@ -44,6 +44,23 @@ export class AuthService {
 
   getUserRole(): string | null {
     return this.getUserRoleFromStorage();
+  }
+
+  getUserId(): number | null {
+    return this.getUserIdFromStorage();
+  }
+
+  private getUserIdFromStorage(): number | null {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return parseInt(localStorage.getItem('userId') || '', 10);
+    }
+    return null;
+  }
+
+  private setUserIdInStorage(id: number): void {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('userId', id.toString());
+    }
   }
 
   private getUserRoleFromStorage(): string | null {

@@ -21,7 +21,6 @@ export class AdminComponent {
 
   createProductForm: FormGroup;
   deleteProductForm: FormGroup;
-  formSubmitted = false;
   message: string | null = null;
 
   constructor(
@@ -32,15 +31,9 @@ export class AdminComponent {
       id: ['', [Validators.required, Validators.minLength(3)]],
       name: ['', [Validators.required, Validators.minLength(3)]],
       price: ['', [Validators.required, Validators.min(1)]],
-      description: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(500),
-        ],
-      ],
+      description: ['', [Validators.required, Validators.maxLength(500)]],
       type: ['', [Validators.required]],
-      discount: [false],
+      offer: [false],
       imageUrl: [
         '',
         [
@@ -62,17 +55,20 @@ export class AdminComponent {
 
   submitCreate(): void {
     if (this.createProductForm.valid) {
-      this.formSubmitted = false;
-      this.productsService.addProduct(this.createProductForm.value);
       console.log(this.createProductForm.value);
+      this.productsService.addProduct(this.createProductForm.value).subscribe({
+        next: () => {
+          alert('Producto creado correctamente');
+          this.createProductForm.reset();
+        },
+      });
     }
   }
 
   submitDelete(): void {
     if (this.deleteProductForm.valid) {
-      this.formSubmitted = false;
       const productId = this.deleteProductForm.value.id;
-      
+
       this.productsService.deleteProduct(productId).subscribe({
         next: () => {
           alert('Producto eliminado correctamente');
@@ -80,7 +76,7 @@ export class AdminComponent {
         },
         error: (err: Error) => {
           alert('Error al eliminar el producto: ' + err.message);
-        }
+        },
       });
     }
   }

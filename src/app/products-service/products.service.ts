@@ -24,16 +24,17 @@ export class ProductsService {
     });
   }
 
-  addProduct(product: Product): void {
-    this.http.post<Product>(this.apiUrl, product).subscribe({
-      next: (newProduct) =>
-        this._products.update((products) => [...products, newProduct]),
-      error: (err) => console.error('Error al añadir producto:', err),
-    });
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.apiUrl, product).pipe(
+      tap((newProduct) => {
+        this._products.update((products) => [...products, newProduct]);
+      })
+    );
   }
 
   deleteProduct(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`)
+    return this.http
+      .delete<void>(`${this.apiUrl}/${id}`)
       .pipe(
         tap(() =>
           this._products.update((products) =>

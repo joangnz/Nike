@@ -32,13 +32,31 @@ export const getProductById = async (req, res) => {
     }
 };
 
+export const createProduct = async (req, res) => {
+    const { id, name, price, description, type, offer, image } = req.body;
+    console.log(id, name, price, description, type, offer, image)
+    const noImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
+    try {
+        const query = `INSERT INTO products VALUES (?, ?, ?, ?, ?, ?, ?);`;
+        const [result] = await db.query(query, [id, name, price, description, type, offer || false, image || noImage]);
+
+        if (result.affectedRows > 0) {
+            res.status(200).json({ message: 'Product created successfully' });
+        } else {
+            res.status(404).json({ message: 'Product not created' });
+        }
+    } catch (error) { 
+        res.status(500).json({ message: 'Error creating product', error });
+    }
+}
+
 export const updateProductById = async (req, res) => {
     const { id } = req.params;
-    const { name, password } = req.body;
+    const { name, price, description, type, offer, image } = req.body;
 
     try {
-        const query = 'UPDATE products SET name = ?, password = ? WHERE id = ?';
-        const [result] = await db.query(query, [name, password, id]);
+        const query = 'UPDATE products SET name = ?, price = ?, description = ?, type = ?, offer = ?, image = ? WHERE id = ?';
+        const [result] = await db.query(query, [name, price, description, type, offer, image, id]);
         if (result.affectedRows > 0) {
             res.status(200).json({ message: 'Product updated successfully' });
         } else {
