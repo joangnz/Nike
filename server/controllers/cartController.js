@@ -6,9 +6,10 @@ export const getCartByUserId = async (req, res) => {
         const query = `
             SELECT cart.id, cart.quantity, p.name, p.price, p.image
             FROM users_products cart
-            JOIN products p ON c.product_id = p.id
-            WHERE c.user_id = ?`;
+            JOIN products p ON cart.product_id = p.id
+            WHERE cart.user_id = ?`;
         const [rows] = await db.query(query, [userId]);
+        console.log("works")
         res.status(200).json(rows);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching cart', error });
