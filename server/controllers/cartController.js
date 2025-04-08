@@ -19,7 +19,7 @@ export const addToCart = async (req, res) => {
     const { userId, productId, quantity } = req.body;
     try {
         const query = `
-            INSERT INTO cart (user_id, product_id, quantity)
+            INSERT INTO users_products (user_id, product_id, quantity)
             VALUES (?, ?, ?)
             ON DUPLICATE KEY UPDATE quantity = quantity + ?`;
         await db.query(query, [userId, productId, quantity, quantity]);
@@ -33,7 +33,7 @@ export const updateCartItem = async (req, res) => {
     const { id } = req.params;
     const { quantity } = req.body;
     try {
-        const query = 'UPDATE cart SET quantity = ? WHERE id = ?';
+        const query = 'UPDATE users_products SET quantity = ? WHERE id = ?';
         await db.query(query, [quantity, id]);
         res.status(200).json({ message: 'Cart item updated' });
     } catch (error) {
@@ -44,7 +44,7 @@ export const updateCartItem = async (req, res) => {
 export const removeFromCart = async (req, res) => {
     const { id } = req.params;
     try {
-        const query = 'DELETE FROM cart WHERE id = ?';
+        const query = 'DELETE FROM users_products WHERE id = ?';
         await db.query(query, [id]);
         res.status(200).json({ message: 'Item removed from cart' });
     } catch (error) {
