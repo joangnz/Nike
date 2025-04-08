@@ -4,8 +4,8 @@ export const getCartByUserId = async (req, res) => {
     const { userId } = req.params;
     try {
         const query = `
-            SELECT c.id, c.quantity, p.name, p.price, p.image
-            FROM cart c
+            SELECT cart.id, cart.quantity, p.name, p.price, p.image
+            FROM users_products cart
             JOIN products p ON c.product_id = p.id
             WHERE c.user_id = ?`;
         const [rows] = await db.query(query, [userId]);

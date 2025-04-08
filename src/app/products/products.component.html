@@ -6,7 +6,7 @@
                 <h3 class="product-name">{{ product.name }}</h3>
                 <p class="product-description">{{ product.description }}</p>
                 <p class="product-price">${{ product.price }}</p>
-                <button class="add-to-cart-btn">Add to Cart</button>
+                <button class="add-to-cart-btn" (click)="addToCart(product.id)">Add to Cart</button>
             </div>
         </div>
     </div>

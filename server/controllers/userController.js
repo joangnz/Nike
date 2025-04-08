@@ -6,7 +6,7 @@ export const register = async (req, res) => {
     try {
         const query = 'INSERT INTO users (username, password) VALUES (?, ?)';
         await db.query(query, [username, password]);
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'User registered successfully', role: 'user', userId: userRows[0].id.toString() });
     } catch (error) {
         res.status(500).json({ message: 'Error registering user', error });
     }
@@ -29,7 +29,9 @@ export const login = async (req, res) => {
         const [userRows] = await db.query(userQuery, [username, password]);
 
         if (userRows.length > 0) {
-            return res.status(200).json({ message: 'Login successful', role: 'user' });
+            return res.status(200).json({
+                message: 'Login successful', role: 'user', userId: userRows[0].id.toString()
+            });
         }
 
         // If no match is found in either table

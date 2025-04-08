@@ -17,21 +17,21 @@ export class AuthService {
 
   login(data: { username: string; password: string }): Observable<any> {
     return this.http
-      .post<{ role: string, id: string }>(`${this.apiUrl}/user/login`, data)
+      .post<{ role: string, userId: string }>(`${this.apiUrl}/user/login`, data)
       .pipe(
         tap((response) => {
           this.setUserRoleInStorage(response.role);
-          this.setUserIdInStorage(parseInt(response.id, 10));
+          this.setUserIdInStorage(parseInt(response.userId, 10));
           this.userRoleSubject.next(response.role);
         })
       );
   }
 
   register(data: { username: string; password: string }): Observable<any> {
-    return this.http.post<{id: string }>(`${this.apiUrl}/user/register`, data).pipe(
+    return this.http.post<{userId: string }>(`${this.apiUrl}/user/register`, data).pipe(
       tap((response) => {
         this.setUserRoleInStorage('user');
-        this.setUserIdInStorage(parseInt(response.id, 10));
+        this.setUserIdInStorage(parseInt(response.userId, 10));
         this.userRoleSubject.next('user');
       })
     );
