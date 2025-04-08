@@ -1,5 +1,5 @@
 <main id="cart">
-    <h1>Your Cart</h1>
+    <h1>My Cart</h1>
     <div *ngIf="cartItems.length > 0; else emptyCart">
         <div *ngFor="let item of cartItems" class="cart-item">
             <img [src]="item.image" alt="{{ item.name }}" class="cart-item-image">
