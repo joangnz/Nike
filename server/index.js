@@ -1,9 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2/promise';
+
 import { adminRoutes } from './routes/admin.js';
 import { userRoutes } from './routes/user.js';
 import { productRoutes } from './routes/product.js';
+import { cartRoutes } from './routes/cart.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -31,6 +33,7 @@ export default db;
 app.use('/api/admin', adminRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
 
 // GET: Fetch all users
 app.get('/api/teams', async (req, res) => {
