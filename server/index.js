@@ -6,6 +6,7 @@ import { adminRoutes } from './routes/admin.js';
 import { userRoutes } from './routes/user.js';
 import { productRoutes } from './routes/product.js';
 import { cartRoutes } from './routes/cart.js';
+import { purchasesRoutes } from './routes/purchases.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,6 +35,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/purchases', purchasesRoutes);
 
 // GET: Fetch all users
 app.get('/api/teams', async (req, res) => {
