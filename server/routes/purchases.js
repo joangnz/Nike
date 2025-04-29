@@ -4,18 +4,18 @@ import {
     createPurchase,
     updatePurchaseById,
     deletePurchaseById,
-} from '../controllers/purchaseController.js';
+} from '../controllers/purchasesController.js';
 
-export const purchaseRoutes = express.Router();
+export const purchasesRoutes = express.Router();
 
 // GET: Fetch all purchases
-purchaseRoutes.get('/', getAll);
+purchasesRoutes.get('/', getAll);
 
 // POST: Create a new purchase
-purchaseRoutes.post('/', createPurchase);
+purchasesRoutes.post('/', createPurchase);
 
 // PUT: Update a purchase by ID
-purchaseRoutes.put('/:id', updatePurchaseById);
+purchasesRoutes.put('/:id', updatePurchaseById);
 
 // DELETE: Delete a purchase by ID
-purchaseRoutes.delete('/:id', deletePurchaseById);
+purchasesRoutes.delete('/:id', deletePurchaseById);
