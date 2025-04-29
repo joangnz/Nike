@@ -34,7 +34,6 @@ export const getPurchaseByUserId = async (req, res) => {
 
 export const createPurchase = async (req, res) => {
     const { id, name, price, description, type, offer, image } = req.body;
-    console.log(id, name, price, description, type, offer, image)
     const noImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
     try {
         const query = `INSERT INTO purchases VALUES (?, ?, ?, ?, ?, ?, ?);`;

@@ -36,7 +36,6 @@ export class ProductsComponent {
       return;
     }
 
-    console.log('Adding to cart:', { productId, userId });
     this.cartService.addToCart(userId.toString(), productId, 1).subscribe({
       next: () => alert('Product added to cart!'),
       error: (err) => console.error('Error adding to cart:', err),

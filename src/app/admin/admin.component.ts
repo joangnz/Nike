@@ -55,7 +55,6 @@ export class AdminComponent {
 
   submitCreate(): void {
     if (this.createProductForm.valid) {
-      console.log(this.createProductForm.value);
       this.productsService.addProduct(this.createProductForm.value).subscribe({
         next: () => {
           alert('Producto creado correctamente');
